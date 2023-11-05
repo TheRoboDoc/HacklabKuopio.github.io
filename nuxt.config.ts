@@ -8,10 +8,12 @@ export default defineNuxtConfig({
         vueI18n: './i18n.config.ts',
         locales: [
             {
+                name: 'Suomi/Finnish',
                 code: 'fi',
                 file: 'fi.json'
             },
             {
+                name: 'English',
                 code: 'en',
                 file: 'en.json'
             }
@@ -20,7 +22,7 @@ export default defineNuxtConfig({
         langDir: 'locals',
         strategy: 'no_prefix',
         defaultLocale: 'fi',
-        detectBrowserLanguage: false,
+        detectBrowserLanguage: true,
     },
     css: ['/assets/css/main.css'],
     generate: {
