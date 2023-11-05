@@ -1,5 +1,22 @@
 <script setup>
-    const { locale } = useI18n()
+    const { locale, locales, setLocale } = useI18n();
+
+    const availableLocales = computed(() => {
+        return (locales.value).filter(i => i.code !== locale.value);
+    });
+
+    const changeLocale = (newLocale) => {
+        setLocale(newLocale);
+    };
+
+    const languageImage = {
+        fi: '/img/finland.png',
+        en: '/img/greatbritain.png'
+    };
+
+    const getLanguageImage = (code) => {
+        return languageImage[code] || '/img/globe.png';
+    };
 </script>
 
 <template>
@@ -16,6 +33,21 @@
             <h1>Hacklab Kuopio</h1>
             <h4>{{ $t('slogan') }}</h4>
         </div>
+    </div>
+
+    <!--Language selection buttons-->
+    <div class="language-switch-container">
+        <button
+            v-for="availableLocale in availableLocales"
+            :key="availableLocale.code"
+            @click="changeLocale(availableLocale.code)"
+        >
+            {{ availableLocale.name }}
+
+            <div class="image-container">
+                <img :src="getLanguageImage(availableLocale.code)" :alt="availableLocale.code" />
+            </div>
+        </button>
     </div>
 
     <div class="content-wrapper flex">
